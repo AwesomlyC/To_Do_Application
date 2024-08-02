@@ -1,5 +1,6 @@
-package com.personal.To_Do_Application;
+package com.personal.To_Do_Application.repository;
 
+import com.personal.To_Do_Application.Task;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
