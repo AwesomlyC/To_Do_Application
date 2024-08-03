@@ -1,6 +1,6 @@
 package com.personal.To_Do_Application.controller;
 
-import com.personal.To_Do_Application.Task;
+import com.personal.To_Do_Application.model.Task;
 import com.personal.To_Do_Application.TaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @Controller
 @RequestMapping("/api/v1/tasks")
 public class TaskController {

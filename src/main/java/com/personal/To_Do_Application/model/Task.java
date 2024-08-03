@@ -1,4 +1,4 @@
-package com.personal.To_Do_Application;
+package com.personal.To_Do_Application.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
