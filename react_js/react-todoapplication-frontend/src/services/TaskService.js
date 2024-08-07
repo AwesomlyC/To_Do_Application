@@ -8,6 +8,10 @@ class TaskService{
     getAllTask(){
         return axios.get(TASK_BASE_REST_API_URL);
     }
+
+    createNewTask(task){
+        return axios.post(TASK_BASE_REST_API_URL, task)
+    }
 }
 
 export default new TaskService();
