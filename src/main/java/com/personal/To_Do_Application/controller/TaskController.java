@@ -23,7 +23,6 @@ public class TaskController {
     @GetMapping("/")
     public ResponseEntity<List<Task>> getAllTask(){
         log.info(String.format("%s",taskService.getAllTask()));
-        System.out.println("called regular");
         return ResponseEntity.ok(taskService.getAllTask());
     }
 
@@ -35,8 +34,6 @@ public class TaskController {
     @GetMapping("/incompleted")
     public ResponseEntity<List<Task>> getAllIncompletedTask(){
         log.info(String.format("%s",taskService.findAllIncompletedTask()));
-        log.info("WORKS");
-        System.out.println("IDK");
         return ResponseEntity.ok(taskService.findAllIncompletedTask());
     }
     @PostMapping("/")
