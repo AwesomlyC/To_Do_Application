@@ -13,7 +13,7 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public Task createNewTask(Task task){
+    public Task createTask(Task task){
         return taskRepository.save(task);
     }
 

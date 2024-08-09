@@ -22,7 +22,7 @@ public class TaskController {
 
     @GetMapping("/")
     public ResponseEntity<List<Task>> getAllTask(){
-        log.info(String.format("%s",taskService.getAllTask()));
+        log.info(String.format("Called getAllTask %s",taskService.getAllTask()));
         return ResponseEntity.ok(taskService.getAllTask());
     }
 
@@ -38,14 +38,16 @@ public class TaskController {
     }
     @PostMapping("/")
     public ResponseEntity<Task> createTask(@RequestBody Task task){
-        return ResponseEntity.ok(taskService.createNewTask(task));
+        log.info(String.format("CALLED CREATE TASK"));
+
+        return ResponseEntity.ok(taskService.createTask(task));
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<Task> updateTask(@PathVariable String id, @RequestBody Task task){
-        task.setId(id);
-        return ResponseEntity.ok(taskService.updateTask(task));
-    }
+//    @PostMapping("/{id}")
+//    public ResponseEntity<Task> updateTask(@PathVariable String id, @RequestBody Task task){
+//        task.setId(id);
+//        return ResponseEntity.ok(taskService.updateTask(task));
+//    }
 
     @DeleteMapping("/{taskDescription}")
     public ResponseEntity<Boolean> deleteTask(@PathVariable String taskDescription) {

@@ -12,6 +12,7 @@ class TaskService{
     }
 
     createNewTask(task){
+        console.log("Create New Task: "  + task);
         return axios.post(TASK_BASE_REST_API_URL, task)
     }
     deleteTask(taskDescription){
