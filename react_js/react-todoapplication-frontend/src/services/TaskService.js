@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 
-// const TASK_BASE_REST_API_URL = 'http://localhost:8080/api/v1/tasks/';
-const TASK_BASE_REST_API_URL = 'https://to-do-application-weld-six.vercel.app/api/v1/tasks/';
+const TASK_BASE_REST_API_URL = 'http://localhost:8080/api/v1/tasks/';
+// const TASK_BASE_REST_API_URL = 'https://to-do-application-weld-six.vercel.app/api/v1/tasks';
 
 
 class TaskService{
@@ -13,6 +13,9 @@ class TaskService{
 
     createNewTask(task){
         return axios.post(TASK_BASE_REST_API_URL, task)
+    }
+    deleteTask(taskDescription){
+        return axios.delete(TASK_BASE_REST_API_URL + taskDescription)
     }
 }
 

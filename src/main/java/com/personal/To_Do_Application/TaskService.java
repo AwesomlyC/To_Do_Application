@@ -37,6 +37,7 @@ public class TaskService {
         taskRepository.delete(task);
     }
 
+    public Task getByTaskDescription(String taskDescription){return taskRepository.getByTaskDescription(taskDescription);}
     public Task updateTask(Task task){
         return taskRepository.save(task);
     }

@@ -6,7 +6,10 @@ const ListTaskComponent = () => {
     const [tasks, setTasks] = useState([])
 
     useEffect(() => {
-        
+        getAllTask()
+    }, [])
+    
+    const getAllTask = () =>{
         TaskService.getAllTask().then((response) => {
             setTasks(response.data);
             console.log(response.data);
@@ -14,9 +17,15 @@ const ListTaskComponent = () => {
         }).catch(error =>{
             console.log("ERROR: " + error);
         })
-    }, [])
-    
-    
+    }
+    const deleteTask = (taskDescription) => {
+        console.log("Deleting: "  + taskDescription);
+        TaskService.deleteTask(taskDescription).then((response) =>{
+            getAllTask();
+        }).catch(error =>{
+            console.log("Error - Unable to delete " + taskDescription);
+        });
+    }
     return (
         <div className = "container">
             <h2 className='text-center'> List Tasks</h2>
@@ -28,6 +37,7 @@ const ListTaskComponent = () => {
                     <th>Task Description</th>
 
                     <th>Task Status</th>
+                    <th>Actions</th>
                 </thead>
                 <tbody>
                     {
@@ -37,6 +47,9 @@ const ListTaskComponent = () => {
                                     <td> {task.id} </td>
                                     <td> {task.task} </td>
                                     <td> {String(task.completed)} </td>
+                                    <td>
+                                        <button className='btn btn-danger' style = {{marginLeft:"10px"}} onClick={()=>deleteTask(task.task)}>Delete</button>
+                                    </td>
                                 </tr>
                         )
                     }
