@@ -20,16 +20,17 @@ public class ToDoApplication implements CommandLineRunner{
 	public void run(String... args){
 		System.out.println("---Creating Tasks---");
 //		createTasks();
-		getAllTasks();
+//		getAllTasks();
+		System.out.println("Number of documents: " + taskRepository.count());
 		System.out.println("---Exiting...---");
 	}
 
 	public void createTasks(){
 		System.out.println("Data Creation Started...");
-		taskRepository.save(new Task("task1", false));
-		taskRepository.save(new Task("task2", false));
-		taskRepository.save(new Task("task3", true));
-		taskRepository.save(new Task("task4", true));
+//		taskRepository.save(new Task("task1", false));
+//		taskRepository.save(new Task("task2", false));
+//		taskRepository.save(new Task("task3", true));
+//		taskRepository.save(new Task("task4", true));
 
 	}
 

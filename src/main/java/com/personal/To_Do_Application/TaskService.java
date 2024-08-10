@@ -42,4 +42,8 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
+    public Long getCount(){
+        return taskRepository.count();
+    }
+
 }

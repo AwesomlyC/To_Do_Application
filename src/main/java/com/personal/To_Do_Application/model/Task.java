@@ -9,12 +9,19 @@ public class Task {
     private String id;
     private String taskDescription;
     private boolean completed;
+    private Long taskNumber;
 
-    public Task(String taskDescription, boolean completed){
+    public Task(String taskDescription, boolean completed, Long taskNumber){
         super();
         this.taskDescription = taskDescription;
         this.completed = completed;
+        this.taskNumber = taskNumber;
     }
+//    public Task(String taskDescription, Long taskNumber){
+//        super();
+//        this.taskDescription = taskDescription;
+//        this.taskNumber = taskNumber;
+//    }
 
     // Getters
     public String getId(){
@@ -27,6 +34,9 @@ public class Task {
 
     public boolean getCompleted(){
         return completed;
+    }
+    public Long getTaskNumber(){
+        return taskNumber;
     }
 
     // Setters
@@ -41,7 +51,10 @@ public class Task {
     public void setCompleted(boolean completed){
         this.completed = completed;
     }
-
+    
+    public void setTaskNumber(Long taskNumber){
+        this.taskNumber = taskNumber;
+    }
     public String toString(){
         return String.format(
                 "Tasks{id: %s, taskDescription: %s, completed: %s",

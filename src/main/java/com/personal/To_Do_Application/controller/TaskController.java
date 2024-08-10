@@ -38,8 +38,7 @@ public class TaskController {
     }
     @PostMapping("/")
     public ResponseEntity<Task> createTask(@RequestBody Task task){
-        log.info(String.format("CALLED CREATE TASK"));
-
+        log.info(String.format("CALLED CREATE TASK -- %s", task));
         return ResponseEntity.ok(taskService.createTask(task));
     }
 
@@ -48,7 +47,10 @@ public class TaskController {
 //        task.setId(id);
 //        return ResponseEntity.ok(taskService.updateTask(task));
 //    }
-
+    @GetMapping("/count")
+    public ResponseEntity<Long> getCount(){
+        return ResponseEntity.ok((Long)taskService.getCount() + 1);
+    }
     @DeleteMapping("/{taskDescription}")
     public ResponseEntity<Boolean> deleteTask(@PathVariable String taskDescription) {
         Task task = taskService.getByTaskDescription(taskDescription);
