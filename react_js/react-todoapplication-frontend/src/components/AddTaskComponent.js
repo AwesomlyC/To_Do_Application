@@ -14,7 +14,7 @@ const AddTaskComponent = () => {
         const task = {taskDescription, completed}
 
         console.log("Sending Task: " + task)
-        TaskService.getTotalCount().then((response) => {
+        TaskService.getNextTaskNumber().then((response) => {
             console.log("Response: " + response.data)
             console.log("Modified response Data: " + {...task, taskNumber: response.data})
             TaskService.createNewTask({...task, taskNumber: response.data}).then((response) => {
@@ -26,12 +26,7 @@ const AddTaskComponent = () => {
         }).catch(error => {
             console.log("Error has occurred during saveTask: " + error);
         });
-        // TaskService.createNewTask(task).then((response) => {
-        //     console.log(response.data)
-        //     navigate('/tasks')
-        // }).catch(error => {
-        //     console.log("Error has occurred: " + error);
-        // });
+
     }
     return (
     <div>

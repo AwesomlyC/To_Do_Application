@@ -22,7 +22,6 @@ public class TaskController {
 
     @GetMapping("/")
     public ResponseEntity<List<Task>> getAllTask(){
-        log.info(String.format("Called getAllTask %s",taskService.getAllTask()));
         return ResponseEntity.ok(taskService.getAllTask());
     }
 
@@ -33,12 +32,10 @@ public class TaskController {
 
     @GetMapping("/incompleted")
     public ResponseEntity<List<Task>> getAllIncompletedTask(){
-        log.info(String.format("%s",taskService.findAllIncompletedTask()));
         return ResponseEntity.ok(taskService.findAllIncompletedTask());
     }
     @PostMapping("/")
     public ResponseEntity<Task> createTask(@RequestBody Task task){
-        log.info(String.format("CALLED CREATE TASK -- %s", task));
         return ResponseEntity.ok(taskService.createTask(task));
     }
 
@@ -49,7 +46,13 @@ public class TaskController {
 //    }
     @GetMapping("/count")
     public ResponseEntity<Long> getCount(){
-        return ResponseEntity.ok((Long)taskService.getCount() + 1);
+        return ResponseEntity.ok((Long)taskService.getCount());
+    }
+    // Retrieves the max number found under taskNumber id
+    // Returns the max + 1
+    @GetMapping("/getNewNumber")
+    public ResponseEntity<Long> getNextTaskNumber(){
+        return ResponseEntity.ok((Long)taskService.getMaxTaskNumber() + 1);
     }
     @DeleteMapping("/{taskDescription}")
     public ResponseEntity<Boolean> deleteTask(@PathVariable String taskDescription) {

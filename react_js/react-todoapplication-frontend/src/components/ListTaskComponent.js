@@ -44,7 +44,7 @@ const ListTaskComponent = () => {
                         tasks.map(
                             task => 
                                 <tr key = {task.id}>
-                                    <td> {task.id} </td>
+                                    <td> {task.taskNumber} </td>
                                     <td> {task.task} </td>
                                     <td> {String(task.completed)} </td>
                                     <td>

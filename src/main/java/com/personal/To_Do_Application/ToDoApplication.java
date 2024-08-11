@@ -13,6 +13,8 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 public class ToDoApplication implements CommandLineRunner{
 	@Autowired
     TaskRepository taskRepository;
+	@Autowired
+	TaskService taskService;
 	public static void main(String[] args) {
 		SpringApplication.run(ToDoApplication.class, args);
 	}
@@ -22,6 +24,7 @@ public class ToDoApplication implements CommandLineRunner{
 //		createTasks();
 //		getAllTasks();
 		System.out.println("Number of documents: " + taskRepository.count());
+		System.out.println("MaxValue: " + taskService.getMaxTaskNumber());
 		System.out.println("---Exiting...---");
 	}
 

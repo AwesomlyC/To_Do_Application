@@ -17,11 +17,6 @@ public class Task {
         this.completed = completed;
         this.taskNumber = taskNumber;
     }
-//    public Task(String taskDescription, Long taskNumber){
-//        super();
-//        this.taskDescription = taskDescription;
-//        this.taskNumber = taskNumber;
-//    }
 
     // Getters
     public String getId(){
@@ -57,8 +52,8 @@ public class Task {
     }
     public String toString(){
         return String.format(
-                "Tasks{id: %s, taskDescription: %s, completed: %s",
-                getId(), getTask(), getCompleted());
+                "Tasks{id: %s, taskDescription: %s, completed: %s, taskNumber: %s",
+                getId(), getTask(), getCompleted(), getTaskNumber());
     }
 }
 
