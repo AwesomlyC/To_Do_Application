@@ -31,12 +31,9 @@ public class TaskService {
         return taskRepository.getById(id);
     }
 
-    public List<Task> findAllCompletedTask(){
-        return taskRepository.findByCompletedTrue();
-    }
-
-    public List<Task> findAllIncompletedTask(){
-        return taskRepository.findByCompletedFalse();
+    public Task updateStatus(Task task, String new_status){
+        task.setStatus(new_status);
+        return taskRepository.save(task);
     }
 
     public void deleteTask(Task task){

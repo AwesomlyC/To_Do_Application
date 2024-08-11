@@ -5,18 +5,16 @@ import {Link, useNavigate} from 'react-router-dom'
 const AddTaskComponent = () => {
 
     const [taskDescription, setTaskDescription] = useState('')
-    const [completed, setCompleted] = useState(false)
+    // const [completed, setCompleted] = useState(false)
     const navigate = useNavigate();
 
-    const saveTask = (e) => {
+    const saveTask = (e, status) => {
         e.preventDefault();
 
-        const task = {taskDescription, completed}
+        const task = {taskDescription, status}
 
         console.log("Sending Task: " + task)
         TaskService.getNextTaskNumber().then((response) => {
-            console.log("Response: " + response.data)
-            console.log("Modified response Data: " + {...task, taskNumber: response.data})
             TaskService.createNewTask({...task, taskNumber: response.data}).then((response) => {
                 console.log(response.data)
                 navigate('/tasks')
@@ -49,7 +47,7 @@ const AddTaskComponent = () => {
                                 >
                                 </input>
 
-                                <label className='form-label'>Task Status</label>
+                                {/* <label className='form-label'>Task Status</label>
                                 <input 
                                     type='boolean' 
                                     placeholder='Enter Task Status'
@@ -58,9 +56,9 @@ const AddTaskComponent = () => {
                                     // value = {completed}
                                     onChange = {(e) => setCompleted(e.target.value)}
                                 >
-                                </input>
+                                </input> */}
                             </div>
-                            <button className='btn btn-success' onClick={(e) => saveTask(e)}>Save Task</button>
+                            <button className='btn btn-success' onClick={(e) => saveTask(e, "Incomplete")}>Save Task</button>
                             <Link to='/tasks' className='btn btn-danger'>Cancel</Link>
                         </form>
                     </div>

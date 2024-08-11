@@ -24,6 +24,10 @@ class TaskService{
     deleteTask(taskDescription){
         return axios.delete(TASK_BASE_REST_API_URL + taskDescription)
     }
+
+    updateStatus(task, newStatus){
+        return axios.post(TASK_BASE_REST_API_URL + newStatus, task);
+    }
 }
 
 export default new TaskService();

@@ -8,13 +8,13 @@ public class Task {
     @Id
     private String id;
     private String taskDescription;
-    private boolean completed;
+    private String status;
     private Long taskNumber;
 
-    public Task(String taskDescription, boolean completed, Long taskNumber){
+    public Task(String taskDescription, String status, Long taskNumber){
         super();
         this.taskDescription = taskDescription;
-        this.completed = completed;
+        this.status = status;
         this.taskNumber = taskNumber;
     }
 
@@ -27,8 +27,8 @@ public class Task {
         return taskDescription;
     }
 
-    public boolean getCompleted(){
-        return completed;
+    public String getStatus(){
+        return status;
     }
     public Long getTaskNumber(){
         return taskNumber;
@@ -43,8 +43,8 @@ public class Task {
         this.taskDescription = task;
     }
 
-    public void setCompleted(boolean completed){
-        this.completed = completed;
+    public void setStatus(String status){
+        this.status = status;
     }
     
     public void setTaskNumber(Long taskNumber){
@@ -52,8 +52,8 @@ public class Task {
     }
     public String toString(){
         return String.format(
-                "Tasks{id: %s, taskDescription: %s, completed: %s, taskNumber: %s",
-                getId(), getTask(), getCompleted(), getTaskNumber());
+                "Tasks{id: %s, taskDescription: %s, status: %s, taskNumber: %s",
+                getId(), getTask(), getStatus(), getTaskNumber());
     }
 }
 

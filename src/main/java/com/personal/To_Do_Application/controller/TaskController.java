@@ -25,14 +25,14 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getAllTask());
     }
 
-    @GetMapping("/completed")
-    public  ResponseEntity<List<Task>> getAllCompletedTask(){
-        return ResponseEntity.ok(taskService.findAllCompletedTask());
+    @PostMapping("/Complete")
+    public ResponseEntity<Task> updateStatusComplete(@RequestBody Task task){
+        return ResponseEntity.ok(taskService.updateStatus(task, "Complete"));
     }
 
-    @GetMapping("/incompleted")
-    public ResponseEntity<List<Task>> getAllIncompletedTask(){
-        return ResponseEntity.ok(taskService.findAllIncompletedTask());
+    @PostMapping("/Incomplete")
+    public ResponseEntity<Task> updateStatusIncomplete(@RequestBody Task task){
+        return ResponseEntity.ok(taskService.updateStatus(task, "Incomplete"));
     }
     @PostMapping("/")
     public ResponseEntity<Task> createTask(@RequestBody Task task){

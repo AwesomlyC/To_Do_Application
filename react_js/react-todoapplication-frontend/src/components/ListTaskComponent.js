@@ -18,6 +18,7 @@ const ListTaskComponent = () => {
             console.log("ERROR: " + error);
         })
     }
+
     const deleteTask = (taskDescription) => {
         console.log("Deleting: "  + taskDescription);
         TaskService.deleteTask(taskDescription).then((response) =>{
@@ -26,9 +27,20 @@ const ListTaskComponent = () => {
             console.log("Error - Unable to delete " + taskDescription);
         });
     }
+
+    const updateStatus = (task, newStatus) => {
+        console.log("Updating the status for task: " + task + " --> To status: " + newStatus);
+        TaskService.updateStatus(task, newStatus).then((response) =>{
+            getAllTask();
+        }).catch(error =>{
+            console.log("Error - Unable to update status " + task);
+        });
+    }
+
+
     return (
         <div className = "container">
-            <h2 className='text-center'> List Tasks</h2>
+            <h2 className='text-center'>To-Do-Application -- WhatsOnTheList</h2>
             <Link to ="/add-task" className = "btn btn-primary mb-2">Add Task</Link>
             <table className='table table-bordered table-striped'>
                 <thead>
@@ -46,8 +58,9 @@ const ListTaskComponent = () => {
                                 <tr key = {task.id}>
                                     <td> {task.taskNumber} </td>
                                     <td> {task.task} </td>
-                                    <td> {String(task.completed)} </td>
+                                    <td> {task.status} </td>
                                     <td>
+                                        <button className='btn btn-primary' onClick={()=>updateStatus(task, (task.status === "Incomplete") ? "Complete" : "Incomplete")}>Update Status</button>
                                         <button className='btn btn-danger' style = {{marginLeft:"10px"}} onClick={()=>deleteTask(task.task)}>Delete</button>
                                     </td>
                                 </tr>
