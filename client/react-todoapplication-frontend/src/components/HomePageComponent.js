@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 
 function HomePageComponent() {
 
-  const {listName, newListName} = useState("")
-
+  const {listName, setListName} = useState("")
+  const {existListName, loadListName} = useState("")
 
   const setNewListName = (e) => {
     e.preventDefault();
@@ -11,6 +11,9 @@ function HomePageComponent() {
   }
 
 
+  const loadListNameFile = (e) => {
+    e.preventDefault();
+  }
 
 
   return (
@@ -23,28 +26,34 @@ function HomePageComponent() {
             <div className='card-body'>
               <form>
                 <div className='form-group mb-2'>
-                  <label className='form-label'>Create A New List</label>
+                  <label className='form-label fw-bold'>Create A New List</label>
                   <input
                     type='text'
                     placeholder='Enter a name'
                     name='newListName'
-                    className='form=control'
+                    className='form-control'
                     value={listName}
-                    onChange={(e) => setNewListName(e.target.value)}
-                  ></input>
-                  <label className='form-label'>Existing List</label>
-                  <input
-                    type='text'
-                    placeholder='Enter a name'
-                    name='newListName'
-                    className='form=control'
-                    value={listName}
-                    onChange={(e) => setNewListName(e.target.value)}
+                    onChange={(e) => setListName(e.target.value)}
                   ></input>
                 </div>
+                <button className='btn btn-success' onClick={(e) => setNewListName(e)}>Create</button>
+                <div className='form-group mb-2'>
+                <br />
+
+
+                <label className='form-label fw-bold'>Load Existing List</label>
+                  <input
+                    type='text'
+                    placeholder='Enter existing name'
+                    name='newListName'
+                    className='form-control'
+                    value={existListName}
+                    onChange={(e) => loadListName(e.target.value)}
+                  ></input>
+                </div>
+                <button className='btn btn-primary' onClick={(e) => loadListNameFile(e)}>Load</button>
               </form>
             </div>
-            TEST
           </div>
 
         </div>
