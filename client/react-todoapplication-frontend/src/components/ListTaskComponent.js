@@ -40,7 +40,7 @@ const ListTaskComponent = () => {
 
     return (
         <div className = "container">
-            <h2 className='text-center'>To-Do-Application -- WhatsOnTheList</h2>
+            <h2 className='text-center'>WhatsOnTheList</h2>
             <Link to ="/add-task" className = "btn btn-primary mb-2">Add Task</Link>
             <table className='table table-bordered table-striped'>
                 <thead>

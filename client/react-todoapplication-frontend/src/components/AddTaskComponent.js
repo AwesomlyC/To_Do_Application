@@ -5,7 +5,6 @@ import {Link, useNavigate} from 'react-router-dom'
 const AddTaskComponent = () => {
 
     const [taskDescription, setTaskDescription] = useState('')
-    // const [completed, setCompleted] = useState(false)
     const navigate = useNavigate();
 
     const saveTask = (e, status) => {
