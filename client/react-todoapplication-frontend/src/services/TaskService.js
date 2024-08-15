@@ -28,6 +28,13 @@ class TaskService{
     updateStatus(task, newStatus){
         return axios.post(TASK_BASE_REST_API_URL + newStatus, task);
     }
+
+    getAllListName(listName){
+        console.log("TEST: " + listName);
+        console.log(TASK_BASE_REST_API_URL + listName);
+        return axios.get(TASK_BASE_REST_API_URL + listName)
+    }
+
 }
 
 export default new TaskService();

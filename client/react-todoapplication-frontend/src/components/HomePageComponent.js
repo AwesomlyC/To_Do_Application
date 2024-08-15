@@ -1,18 +1,36 @@
 import React, {useState} from 'react'
+import TaskService from '../services/TaskService';
+import { useNavigate } from 'react-router-dom';
 
 function HomePageComponent() {
 
-  const {listName, setListName} = useState("")
-  const {existListName, loadListName} = useState("")
+  const [listName, setListName] = useState("")
+  const [existListName, loadListName] = useState("")
+  const navigate = useNavigate();
 
   const setNewListName = (e) => {
     e.preventDefault();
+
+    console.log("Setting New List Name: " + e);
+    // TaskService.getAllListName(e).then((response) => {
+    //   console.log(response.data);
+    // }).catch(error =>{
+    //   console.log("ERROR ERROR");
+    // })
 
   }
 
 
   const loadListNameFile = (e) => {
     e.preventDefault();
+    console.log("Loading Existing List: " + existListName);
+    TaskService.getAllListName(existListName).then((response) => {
+      loadListName(response.data)
+      console.log(loadListName);
+      navigate("/" + existListName);
+    }).catch(error =>{
+      console.log("ERROR ERROR");
+    })
   }
 
 

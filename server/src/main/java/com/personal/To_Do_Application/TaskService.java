@@ -3,9 +3,11 @@ package com.personal.To_Do_Application;
 import com.personal.To_Do_Application.model.Task;
 import com.personal.To_Do_Application.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.QueryAnnotation;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +46,6 @@ public class TaskService {
     public Task updateTask(Task task){
         return taskRepository.save(task);
     }
-
     public Long getCount(){
         return taskRepository.count();
     }
@@ -57,6 +58,14 @@ public class TaskService {
         query.limit(1);
         Task maxTask = mongoTemplate.findOne(query, Task.class);
         return (maxTask != null) ? maxTask.getTaskNumber() : 0;
+    }
+
+    public List<Task> getListNameTask(String listName){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("listName").is(listName));
+        List<Task> allTask = mongoTemplate.find(query, Task.class);
+        System.out.println(allTask);
+        return allTask;
     }
 
 }

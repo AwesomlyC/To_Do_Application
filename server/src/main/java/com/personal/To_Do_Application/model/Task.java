@@ -10,12 +10,14 @@ public class Task {
     private String taskDescription;
     private String status;
     private Long taskNumber;
+    private String listName;
 
-    public Task(String taskDescription, String status, Long taskNumber){
+    public Task(String taskDescription, String status, Long taskNumber, String listName){
         super();
         this.taskDescription = taskDescription;
         this.status = status;
         this.taskNumber = taskNumber;
+        this.listName = listName;
     }
 
     // Getters
@@ -33,6 +35,7 @@ public class Task {
     public Long getTaskNumber(){
         return taskNumber;
     }
+    public String getListName(){return listName;}
 
     // Setters
     public void setId(String id){
@@ -50,10 +53,11 @@ public class Task {
     public void setTaskNumber(Long taskNumber){
         this.taskNumber = taskNumber;
     }
+    public void setListName(String listName) {this.listName = listName;}
     public String toString(){
         return String.format(
-                "Tasks{id: %s, taskDescription: %s, status: %s, taskNumber: %s",
-                getId(), getTask(), getStatus(), getTaskNumber());
+                "Tasks{id: %s, taskDescription: %s, status: %s, taskNumber: %s, listName: %s",
+                getId(), getTask(), getStatus(), getTaskNumber(), getListName());
     }
 }
 
