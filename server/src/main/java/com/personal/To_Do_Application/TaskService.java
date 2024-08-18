@@ -42,10 +42,7 @@ public class TaskService {
         taskRepository.delete(task);
     }
 
-    public Task getByTaskDescription(String taskDescription){return taskRepository.getByTaskDescription(taskDescription);}
-    public Task updateTask(Task task){
-        return taskRepository.save(task);
-    }
+//    public Task getByDescription(String taskDescription){return taskRepository.getByDescription(taskDescription);}
     public Long getCount(){
         return taskRepository.count();
     }
@@ -69,10 +66,11 @@ public class TaskService {
     }
 
     public Task findDocument(String listName, String taskDescription, String status){
-        return taskRepository.findByListNameAndTaskDescriptionAndStatus(listName, taskDescription, status);
+        return taskRepository.findByListNameAndDescriptionAndStatus(listName, taskDescription, status);
     }
 
     public Task saveDocument(Task task){
+        System.out.println("SAVED TASK: " + task);
         return taskRepository.save(task);
     }
 

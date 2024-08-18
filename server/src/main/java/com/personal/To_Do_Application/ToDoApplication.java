@@ -29,7 +29,7 @@ public class ToDoApplication implements CommandLineRunner{
 	}
 
 	public void createTasks(){
-		System.out.println("Data Creation Started...");
+//		System.out.println("Data Creation Started...");
 //		taskRepository.save(new Task("task1", false));
 //		taskRepository.save(new Task("task2", false));
 //		taskRepository.save(new Task("task3", true));
@@ -37,18 +37,14 @@ public class ToDoApplication implements CommandLineRunner{
 
 	}
 
-	public void getTask(){
 
-	}
+//	public void getAllTasks(){
+//		taskRepository.findAll().forEach(task -> System.out.println(task));
+//	}
 
-
-	public void getAllTasks(){
-		taskRepository.findAll().forEach(task -> System.out.println(task));
-	}
-
-	public void deleteAllTasks(){
-		taskRepository.findAll().forEach(task -> taskRepository.delete(task));
-		System.out.println("Deleted all tasks...");
-	}
+//	public void deleteAllTasks(){
+//		taskRepository.findAll().forEach(task -> taskRepository.delete(task));
+//		System.out.println("Deleted all tasks...");
+//	}
 
 }

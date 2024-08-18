@@ -7,14 +7,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Task {
     @Id
     private String id;
-    private String taskDescription;
+    private String description;
     private String status;
     private Long taskNumber;
     private String listName;
 
-    public Task(String taskDescription, String status, String listName, Long taskNumber){
+    public Task(String description, String status, String listName, Long taskNumber){
         super();
-        this.taskDescription = taskDescription;
+        this.description = description;
         this.status = status;
         this.taskNumber = taskNumber;
         this.listName = listName;
@@ -25,8 +25,8 @@ public class Task {
         return id;
     }
 
-    public String getTask(){
-        return taskDescription;
+    public String getDescription(){
+        return description;
     }
 
     public String getStatus(){
@@ -42,8 +42,8 @@ public class Task {
         this.id = id;
     }
 
-    public void setTaskDescription(String taskDescription){
-        this.taskDescription = taskDescription;
+    public void setDescription(String description){
+        this.description = description;
     }
 
     public void setStatus(String status){
@@ -56,8 +56,8 @@ public class Task {
     public void setListName(String listName) {this.listName = listName;}
     public String toString(){
         return String.format(
-                "Tasks{id: %s, taskDescription: %s, status: %s, taskNumber: %s, listName: %s",
-                getId(), getTask(), getStatus(), getTaskNumber(), getListName());
+                "Tasks{id: %s, description: %s, status: %s, taskNumber: %s, listName: %s",
+                getId(), getDescription(), getStatus(), getTaskNumber(), getListName());
     }
 }
 

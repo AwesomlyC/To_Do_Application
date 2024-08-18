@@ -4,7 +4,7 @@ import {Link, useNavigate,useSearchParams} from 'react-router-dom'
 
 const AddTaskComponent = () => {
 
-    const [taskDescription, setTaskDescription] = useState('')
+    const [description, setDescription] = useState('')
     const [searchParams] = useSearchParams();
 
     const navigate = useNavigate();
@@ -14,7 +14,7 @@ const AddTaskComponent = () => {
     const saveTask = (e, status) => {
         e.preventDefault();
 
-        const task = {taskDescription, status, listName}
+        const task = {description, status, listName}
 
         console.log("Sending Task: " + task)
         TaskService.getNextTaskNumber().then((response) => {
@@ -46,8 +46,8 @@ const AddTaskComponent = () => {
                                     placeholder='Enter Task Description'
                                     name='taskDescription' 
                                     className = 'form-control' 
-                                    value = {taskDescription}
-                                    onChange = {(e) => setTaskDescription(e.target.value)}
+                                    value = {description}
+                                    onChange = {(e) => setDescription(e.target.value)}
                                 >
                                 </input>
 

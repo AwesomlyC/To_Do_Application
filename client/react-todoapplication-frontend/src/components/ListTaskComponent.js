@@ -37,12 +37,12 @@ const ListTaskComponent = () => {
     }
 
     const updateStatus = (task, newStatus) => {
-        console.log("Updating the status for task: " + task + " --> To status: " + newStatus);
         TaskService.updateStatus(task, newStatus).then((response) =>{
             getAllListName(listName);
         }).catch(error =>{
             console.log("Error - Unable to update status " + task);
         });
+
     }
 
     const handleEditClick = (id, currentTaskDescription) =>{
@@ -92,14 +92,14 @@ const ListTaskComponent = () => {
                                         <button onClick={() => handleSaveClick(task)}>Save</button>
                                         </div>
                                     ) : (
-                                        <td> {task.task} </td>
+                                        <td> {task.description} </td>
 
                                     )}
                                     <td> {task.status} </td>
                                     <td>
                                         <button className='btn btn-primary' onClick={()=>updateStatus(task, (task.status === "Incomplete") ? "Complete" : "Incomplete")}>Update Status</button>
-                                        <button className='btn btn-danger' style = {{marginLeft:"10px"}} onClick={()=>deleteTask(task.listName, task.task, task.status)}>Delete</button>
-                                        <button className='btn btn-success'  style = {{marginLeft: "10px"}} onClick={() => handleEditClick(task.id, task.task)}>Edit</button>
+                                        <button className='btn btn-danger' style = {{marginLeft:"10px"}} onClick={()=>deleteTask(task.listName, task.description, task.status)}>Delete</button>
+                                        <button className='btn btn-success'  style = {{marginLeft: "10px"}} onClick={() => handleEditClick(task.id, task.description)}>Edit</button>
                                     </td>
                                 </tr>
                         )

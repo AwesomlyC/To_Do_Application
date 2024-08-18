@@ -27,11 +27,20 @@ public class TaskController {
 
     @PostMapping("/Complete")
     public ResponseEntity<Task> updateStatusComplete(@RequestBody Task task){
+//        log.info("DEBUGINGG COMPLETE-- " + task + ": " + task.getTaskDescription());
+        System.out.println("BEFORE COMPLETE: " + task);
+        Task test = taskService.updateStatus(task, "Complete");
+        System.out.println("Complete TEST: " + test);
         return ResponseEntity.ok(taskService.updateStatus(task, "Complete"));
     }
 
     @PostMapping("/Incomplete")
     public ResponseEntity<Task> updateStatusIncomplete(@RequestBody Task task){
+//        log.info("DEBUGINGG COMPLETE-- " + task + ": " + task.getTaskDescription());
+        System.out.println("BEFORE INCOMPLETE: " + task);
+
+        Task test = taskService.updateStatus(task, "Incomplete");
+        System.out.println("INCOMPLETE TEST: " + test);
         return ResponseEntity.ok(taskService.updateStatus(task, "Incomplete"));
     }
     @PostMapping("/")
@@ -64,8 +73,10 @@ public class TaskController {
 
     @PutMapping("/{newDescription}")
     public ResponseEntity<Task> updateTaskDescription(@RequestBody Task task, @PathVariable String newDescription){
-        log.debug("SETTING NEW TASK DESCRIPTION: " + newDescription);
-        task.setTaskDescription(newDescription);
+        log.info("SETTING NEW TASK DESCRIPTION: " + newDescription);
+        task.setDescription(newDescription);
+        Task test = taskService.saveDocument(task);
+        System.out.println("TASKDESCRIPTION - " + test);
         return ResponseEntity.ok(taskService.saveDocument(task));
     }
 }
