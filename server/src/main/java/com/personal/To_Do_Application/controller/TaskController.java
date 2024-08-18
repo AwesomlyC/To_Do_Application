@@ -39,11 +39,7 @@ public class TaskController {
         return ResponseEntity.ok(taskService.createTask(task));
     }
 
-//    @PostMapping("/{id}")
-//    public ResponseEntity<Task> updateTask(@PathVariable String id, @RequestBody Task task){
-//        task.setId(id);
-//        return ResponseEntity.ok(taskService.updateTask(task));
-//    }
+
     @GetMapping("/count")
     public ResponseEntity<Long> getCount(){
         return ResponseEntity.ok((Long)taskService.getCount());
@@ -54,10 +50,22 @@ public class TaskController {
     public ResponseEntity<Long> getNextTaskNumber(){
         return ResponseEntity.ok((Long)taskService.getMaxTaskNumber() + 1);
     }
-    @DeleteMapping("/{taskDescription}")
-    public ResponseEntity<Boolean> deleteTask(@PathVariable String taskDescription) {
-        Task task = taskService.getByTaskDescription(taskDescription);
+    @DeleteMapping("/{listName}/{taskDescription}/{status}")
+    public ResponseEntity<Boolean> deleteTask(@PathVariable String listName, @PathVariable String taskDescription, @PathVariable String status) {
+        Task task = taskService.findDocument(listName, taskDescription, status);
         taskService.deleteTask(task);
         return ResponseEntity.ok(true);
+    }
+
+    @GetMapping("/{listName}")
+    public ResponseEntity<List<Task>> getListNameTask(@PathVariable String listName){
+        return ResponseEntity.ok(taskService.getListNameTask(listName));
+    }
+
+    @PutMapping("/{newDescription}")
+    public ResponseEntity<Task> updateTaskDescription(@RequestBody Task task, @PathVariable String newDescription){
+        log.debug("SETTING NEW TASK DESCRIPTION: " + newDescription);
+        task.setTaskDescription(newDescription);
+        return ResponseEntity.ok(taskService.saveDocument(task));
     }
 }

@@ -1,22 +1,27 @@
 import React, { useState } from 'react'
 import TaskService from '../services/TaskService'
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, useNavigate,useSearchParams} from 'react-router-dom'
 
 const AddTaskComponent = () => {
 
     const [taskDescription, setTaskDescription] = useState('')
+    const [searchParams] = useSearchParams();
+
     const navigate = useNavigate();
+    // Retrieve params from URL
+    const listName = searchParams.get('name')
 
     const saveTask = (e, status) => {
         e.preventDefault();
 
-        const task = {taskDescription, status}
+        const task = {taskDescription, status, listName}
 
         console.log("Sending Task: " + task)
         TaskService.getNextTaskNumber().then((response) => {
             TaskService.createNewTask({...task, taskNumber: response.data}).then((response) => {
                 console.log(response.data)
-                navigate('/tasks')
+                // navigate('/tasks')
+                navigate(-1)
             }).catch(error => {
                 console.log("Error has occurred within createNewTask: " + error);
             });
@@ -46,19 +51,9 @@ const AddTaskComponent = () => {
                                 >
                                 </input>
 
-                                {/* <label className='form-label'>Task Status</label>
-                                <input 
-                                    type='boolean' 
-                                    placeholder='Enter Task Status'
-                                    name='completed' 
-                                    className = 'form-control' 
-                                    // value = {completed}
-                                    onChange = {(e) => setCompleted(e.target.value)}
-                                >
-                                </input> */}
                             </div>
                             <button className='btn btn-success' onClick={(e) => saveTask(e, "Incomplete")}>Save Task</button>
-                            <Link to='/tasks' className='btn btn-danger'>Cancel</Link>
+                            <Link to={`/list?name=${listName}`} style={{marginLeft:'10px'}} className='btn btn-danger'>Cancel</Link>
                         </form>
                     </div>
                 </div>

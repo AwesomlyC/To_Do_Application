@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import TaskService from '../services/TaskService'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 const ListTaskComponent = () => {
 
+    // Setters of States
     const [tasks, setTasks] = useState([])
+    const [searchParams] = useSearchParams();
+
+    const [description, setDescription] = useState("null");
+    const [editTaskId, setEditTaskId] = useState(null);
+
+    // Retrieve params from URL
+    const listName = searchParams.get('name')
 
     useEffect(() => {
-        getAllTask()
+        getAllListName(listName)
     }, [])
     
-    const getAllTask = () =>{
-        TaskService.getAllTask().then((response) => {
+    const getAllListName = () =>{
+        TaskService.getAllListName(listName).then((response) => {
             setTasks(response.data);
             console.log(response.data);
 
@@ -19,10 +27,10 @@ const ListTaskComponent = () => {
         })
     }
 
-    const deleteTask = (taskDescription) => {
-        console.log("Deleting: "  + taskDescription);
-        TaskService.deleteTask(taskDescription).then((response) =>{
-            getAllTask();
+    const deleteTask = (listName, taskDescription, status) => {
+        console.log("Deleting Task: "  + listName + " " + taskDescription + " " + status);
+        TaskService.deleteTask(listName, taskDescription, status).then((response) =>{
+            getAllListName(listName);
         }).catch(error =>{
             console.log("Error - Unable to delete " + taskDescription);
         });
@@ -31,37 +39,67 @@ const ListTaskComponent = () => {
     const updateStatus = (task, newStatus) => {
         console.log("Updating the status for task: " + task + " --> To status: " + newStatus);
         TaskService.updateStatus(task, newStatus).then((response) =>{
-            getAllTask();
+            getAllListName(listName);
         }).catch(error =>{
             console.log("Error - Unable to update status " + task);
         });
+    }
+
+    const handleEditClick = (id, currentTaskDescription) =>{
+        setEditTaskId(id);
+        setDescription(currentTaskDescription)
+    }
+
+    const handleSaveClick = (task) => {
+
+        TaskService.updateTaskDescription(task, description).then((response) => {
+            getAllListName(listName);
+        }).catch(error => {
+            console.log("Error - Unable to Update Properly " + error);
+        })
+
+        setEditTaskId(null)
+        setDescription("")
     }
 
 
     return (
         <div className = "container">
             <h2 className='text-center'>WhatsOnTheList</h2>
-            <Link to ="/add-task" className = "btn btn-primary mb-2">Add Task</Link>
+            <Link to ={`/add-task?name=${listName}`} className = "btn btn-primary mb-2">Add Task</Link>
             <table className='table table-bordered table-striped'>
                 <thead>
                     <th>Task Id</th>
-
                     <th>Task Description</th>
-
                     <th>Task Status</th>
                     <th>Actions</th>
                 </thead>
+
                 <tbody>
                     {
                         tasks.map(
                             task => 
                                 <tr key = {task.id}>
                                     <td> {task.taskNumber} </td>
-                                    <td> {task.task} </td>
+                                    {task.id === editTaskId ? (
+                                        <div>
+                                        <input 
+                                          type="text" 
+                                          value={description} 
+                                          onChange={(e) => setDescription(e.target.value)} 
+                                          placeholder="Enter new description" 
+                                        />
+                                        <button onClick={() => handleSaveClick(task)}>Save</button>
+                                        </div>
+                                    ) : (
+                                        <td> {task.task} </td>
+
+                                    )}
                                     <td> {task.status} </td>
                                     <td>
                                         <button className='btn btn-primary' onClick={()=>updateStatus(task, (task.status === "Incomplete") ? "Complete" : "Incomplete")}>Update Status</button>
-                                        <button className='btn btn-danger' style = {{marginLeft:"10px"}} onClick={()=>deleteTask(task.task)}>Delete</button>
+                                        <button className='btn btn-danger' style = {{marginLeft:"10px"}} onClick={()=>deleteTask(task.listName, task.task, task.status)}>Delete</button>
+                                        <button className='btn btn-success'  style = {{marginLeft: "10px"}} onClick={() => handleEditClick(task.id, task.task)}>Edit</button>
                                     </td>
                                 </tr>
                         )
