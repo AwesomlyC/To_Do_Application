@@ -13,8 +13,8 @@ function App() {
         <HeaderComponent />
         <div className='container'>
           <Routes>
-            <Route exact path = "/" Component={ListTaskComponent}></Route>
-            <Route path = "/tasks" Component={ListTaskComponent}></Route>
+            <Route exact path = "/" Component={HomePageComponent}></Route>
+            <Route path = "/list" Component={ListTaskComponent}></Route>
             <Route path = "/add-task" Component={AddTaskComponent}></Route>
             <Route path = "/home" Component={HomePageComponent}></Route>
 

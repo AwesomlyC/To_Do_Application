@@ -50,13 +50,12 @@ public class TaskController {
     public ResponseEntity<Long> getNextTaskNumber(){
         return ResponseEntity.ok((Long)taskService.getMaxTaskNumber() + 1);
     }
-    @DeleteMapping("/{taskDescription}")
-    public ResponseEntity<Boolean> deleteTask(@PathVariable String taskDescription) {
-        Task task = taskService.getByTaskDescription(taskDescription);
+    @DeleteMapping("/{listName}/{taskDescription}/{status}")
+    public ResponseEntity<Boolean> deleteTask(@PathVariable String listName, @PathVariable String taskDescription, @PathVariable String status) {
+        Task task = taskService.findDocument(listName, taskDescription, status);
         taskService.deleteTask(task);
         return ResponseEntity.ok(true);
     }
-
 
     @GetMapping("/{listName}")
     public ResponseEntity<List<Task>> getListNameTask(@PathVariable String listName){

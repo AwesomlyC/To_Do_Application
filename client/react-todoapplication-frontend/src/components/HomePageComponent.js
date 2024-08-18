@@ -8,28 +8,28 @@ function HomePageComponent() {
   const [existListName, loadListName] = useState("")
   const navigate = useNavigate();
 
-  const setNewListName = (e) => {
+  const setNewListName = (e, listName) => {
     e.preventDefault();
 
-    console.log("Setting New List Name: " + e);
-    // TaskService.getAllListName(e).then((response) => {
-    //   console.log(response.data);
-    // }).catch(error =>{
-    //   console.log("ERROR ERROR");
-    // })
+    // Note: This will retrieve any document that does exist under the name
+    // Possible change: Delete all document from existing listName to create a fresh list
+    TaskService.getAllListName(listName).then((response) => {
+      setListName(response.data)
+      navigate("/list?name=" + listName)
+    }).catch(error =>{
+      console.log("ERROR ERROR");
+    })
 
   }
 
 
   const loadListNameFile = (e) => {
     e.preventDefault();
-    console.log("Loading Existing List: " + existListName);
     TaskService.getAllListName(existListName).then((response) => {
       loadListName(response.data)
-      console.log(loadListName);
-      navigate("/" + existListName);
+      navigate("/list?name=" + existListName);
     }).catch(error =>{
-      console.log("ERROR ERROR");
+      console.log("Error in loading list: " + error);
     })
   }
 
@@ -54,7 +54,7 @@ function HomePageComponent() {
                     onChange={(e) => setListName(e.target.value)}
                   ></input>
                 </div>
-                <button className='btn btn-success' onClick={(e) => setNewListName(e)}>Create</button>
+                <button className='btn btn-success' onClick={(e) => setNewListName(e,listName)}>Create</button>
                 <div className='form-group mb-2'>
                 <br />
 

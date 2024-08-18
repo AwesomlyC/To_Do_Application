@@ -68,4 +68,8 @@ public class TaskService {
         return allTask;
     }
 
+    public Task findDocument(String listName, String taskDescription, String status){
+        return taskRepository.findByListNameAndTaskDescriptionAndStatus(listName, taskDescription, status);
+    }
+
 }

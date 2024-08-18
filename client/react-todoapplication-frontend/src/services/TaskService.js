@@ -12,17 +12,19 @@ class TaskService{
     }
 
     createNewTask(task){
-        console.log("Create New Task: "  + task);
         return axios.post(TASK_BASE_REST_API_URL, task)
     }
+
     getTotalCount(){
         return axios.get(TASK_BASE_REST_API_URL + "count")
     }
+
     getNextTaskNumber(){
         return axios.get(TASK_BASE_REST_API_URL + "getNewNumber")
     }
-    deleteTask(taskDescription){
-        return axios.delete(TASK_BASE_REST_API_URL + taskDescription)
+    
+    deleteTask(listName, taskDescription, status){
+        return axios.delete(TASK_BASE_REST_API_URL + listName + "/" + taskDescription + "/" + status)
     }
 
     updateStatus(task, newStatus){
@@ -30,8 +32,6 @@ class TaskService{
     }
 
     getAllListName(listName){
-        console.log("TEST: " + listName);
-        console.log(TASK_BASE_REST_API_URL + listName);
         return axios.get(TASK_BASE_REST_API_URL + listName)
     }
 
