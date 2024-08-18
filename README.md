@@ -26,3 +26,14 @@ MongoDB is a NoSQL DB that is both easy to understand and use. All technologies 
 ## Tutorial Followed
 
 [React JS and Spring Boot Tutorial] (https://www.youtube.com/watch?v=IxYa6cKimZc)
+
+## Version History
+
+- Version 1
+    - Basic Layout with basic features: display all tasks, add button feature, and delete task
+- Version 2
+    - Modify the "id" of the document to be the total count of documents instead. Added feature of updating the status of an existing task
+- Version 3 (Finalize - 8/17/2024)
+    - Add a new home page in which users can create or load lists to display their tasks. Additionally, changed the 'id' to be the maximum number when created instead of the total count. Changed the delete feature to find the specific document (fixed the issue when it delete two documents due to the same 'id'). Added the feature to update the description on the same page.
+- Version 4
+    - TBD
