@@ -12,7 +12,7 @@ public class Task {
     private Long taskNumber;
     private String listName;
 
-    public Task(String taskDescription, String status, Long taskNumber, String listName){
+    public Task(String taskDescription, String status, String listName, Long taskNumber){
         super();
         this.taskDescription = taskDescription;
         this.status = status;
@@ -42,8 +42,8 @@ public class Task {
         this.id = id;
     }
 
-    public void setTask(String task){
-        this.taskDescription = task;
+    public void setTaskDescription(String taskDescription){
+        this.taskDescription = taskDescription;
     }
 
     public void setStatus(String status){

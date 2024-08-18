@@ -72,4 +72,8 @@ public class TaskService {
         return taskRepository.findByListNameAndTaskDescriptionAndStatus(listName, taskDescription, status);
     }
 
+    public Task saveDocument(Task task){
+        return taskRepository.save(task);
+    }
+
 }

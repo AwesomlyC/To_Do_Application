@@ -61,4 +61,11 @@ public class TaskController {
     public ResponseEntity<List<Task>> getListNameTask(@PathVariable String listName){
         return ResponseEntity.ok(taskService.getListNameTask(listName));
     }
+
+    @PutMapping("/{newDescription}")
+    public ResponseEntity<Task> updateTaskDescription(@RequestBody Task task, @PathVariable String newDescription){
+        log.debug("SETTING NEW TASK DESCRIPTION: " + newDescription);
+        task.setTaskDescription(newDescription);
+        return ResponseEntity.ok(taskService.saveDocument(task));
+    }
 }

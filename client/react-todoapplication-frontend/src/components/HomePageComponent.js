@@ -33,6 +33,11 @@ function HomePageComponent() {
     })
   }
 
+  const preventEnter = (e) =>  {
+    if (e.key === "Enter"){
+      e.preventDefault();
+    }
+  }
 
   return (
     <div>
@@ -42,7 +47,7 @@ function HomePageComponent() {
           <div className='card col-md-6 offset-md-3 offset-md-3'>
             <h2 className='text-center'>Home Page</h2>
             <div className='card-body'>
-              <form>
+              <form onSubmit={(e) => preventEnter(e)}>
                 <div className='form-group mb-2'>
                   <label className='form-label fw-bold'>Create A New List</label>
                   <input
@@ -52,6 +57,7 @@ function HomePageComponent() {
                     className='form-control'
                     value={listName}
                     onChange={(e) => setListName(e.target.value)}
+                    onKeyDown={(e) => preventEnter(e)}
                   ></input>
                 </div>
                 <button className='btn btn-success' onClick={(e) => setNewListName(e,listName)}>Create</button>
@@ -67,6 +73,7 @@ function HomePageComponent() {
                     className='form-control'
                     value={existListName}
                     onChange={(e) => loadListName(e.target.value)}
+                    onKeyDown={(e) => preventEnter(e)}
                   ></input>
                 </div>
                 <button className='btn btn-primary' onClick={(e) => loadListNameFile(e)}>Load</button>
