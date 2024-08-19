@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import TaskService from '../services/TaskService'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import "../App.css"
 const ListTaskComponent = () => {
 
@@ -13,8 +13,12 @@ const ListTaskComponent = () => {
 
     // Retrieve params from URL
     const listName = searchParams.get('name')
+    const navigate = useNavigate();
 
     useEffect(() => {
+        if (listName == null || listName.trim() === ''){
+            navigate("/");
+        }
         getAllListName(listName)
     }, [])
     
@@ -52,33 +56,22 @@ const ListTaskComponent = () => {
     }
 
     const handleSaveClick = (task) => {
-
-        TaskService.updateTaskDescription(task, description).then((response) => {
-            getAllListName(listName);
-        }).catch(error => {
-            console.log("Error - Unable to Update Properly " + error);
-        })
+        if (description != null && description.trim() !== ''){
+            TaskService.updateTaskDescription(task, description).then((response) => {
+                getAllListName(listName);
+            }).catch(error => {
+                console.log("Error - Unable to Update Properly " + error);
+            })
+        }
 
         setEditTaskId(null)
         setDescription("")
     }
 
-    const getBackgroundColor = (status) => {
-        console.log("getting backgreound color = " + status)
-        switch (status){
-            case "Complete":
-                console.log("returning lightgreen")
-                return "lightgreen";
-            default:
-                return "brown"
-
-        }
-    }
-
 
     return (
         <div className = "container">
-            <h2 className='text-center'>WhatsOnTheList</h2>
+            <h2 className='text-center'>Your List: {<text className='text-primary'>{listName}</text>}</h2>
             <Link to ={`/add-task?name=${listName}`} className = "btn btn-primary mb-2">Add Task</Link>
             <table className='table table-bordered table-striped'>
                 <thead>
@@ -97,12 +90,13 @@ const ListTaskComponent = () => {
                                     {task.id === editTaskId ? (
                                         <div>
                                         <input 
+                                        className='form-control'
                                           type="text" 
                                           value={description} 
                                           onChange={(e) => setDescription(e.target.value)} 
                                           placeholder="Enter new description" 
                                         />
-                                        <button onClick={() => handleSaveClick(task)}>Save</button>
+                                        <button className='btn btn-primary' onClick={() => handleSaveClick(task)} style={{marginLeft:"10px", marginTop: '5px'}}>Save</button>
                                         </div>
                                     ) : (
                                         <td> {task.description} </td>

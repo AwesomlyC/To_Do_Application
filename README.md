@@ -1,6 +1,6 @@
-# Personal Project: To-Do-List
+# Personal Project: WhatsOnTheList (To-Do List Application)
 
-# Purpose of Project
+## Purpose of Project
 This project is a mini full-stack as it includes the development of both the backend and frontend from end-to-end. 
 As the name suggest, it is a to-do-list project so individuals can organize their day without the requirement of signing in.
 I used React and Bootstrap for the frontend as a way to have a functional webpage as quickly as possible to some styling.
@@ -40,3 +40,5 @@ MongoDB is a NoSQL DB that is both easy to understand and use. All technologies 
     - Update UI phase
         - Color changed for tasks marked completed
         - Changed navbar to be "Home Page | Title | About"
+    - Added About Page
+    - Error Handling when a field is empty/null. Displays an error message when triggered.

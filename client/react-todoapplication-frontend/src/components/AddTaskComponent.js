@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TaskService from '../services/TaskService'
 import {Link, useNavigate,useSearchParams} from 'react-router-dom'
 
@@ -6,27 +6,36 @@ const AddTaskComponent = () => {
 
     const [description, setDescription] = useState('')
     const [searchParams] = useSearchParams();
+    const [errorMessage, setErrorMessage] = useState('');
 
     const navigate = useNavigate();
     // Retrieve params from URL
     const listName = searchParams.get('name')
 
+    useEffect(() => {
+        if (listName == null || listName.trim() === ''){
+            navigate(-1);
+        }
+    })
     const saveTask = (e, status) => {
         e.preventDefault();
 
         const task = {description, status, listName}
-
-        console.log("Sending Task: " + task)
-        TaskService.getNextTaskNumber().then((response) => {
-            TaskService.createNewTask({...task, taskNumber: response.data}).then((response) => {
-                console.log(response.data)
-                navigate(-1)
+        if (description !== null && description.trim() !== ''){
+            setErrorMessage('')
+            TaskService.getNextTaskNumber().then((response) => {
+                TaskService.createNewTask({...task, taskNumber: response.data}).then((response) => {
+                    console.log(response.data)
+                    navigate(-1)
+                }).catch(error => {
+                    console.log("Error has occurred within createNewTask: " + error);
+                });
             }).catch(error => {
-                console.log("Error has occurred within createNewTask: " + error);
+                console.log("Error has occurred during saveTask: " + error);
             });
-        }).catch(error => {
-            console.log("Error has occurred during saveTask: " + error);
-        });
+        } else {
+            setErrorMessage("Invalid Description. Must be length 1 or more character(s)")
+        }
 
     }
     return (
@@ -44,12 +53,12 @@ const AddTaskComponent = () => {
                                     type='text' 
                                     placeholder='Enter Task Description'
                                     name='taskDescription' 
-                                    className = 'form-control' 
+                                    className={`form-control ${errorMessage ? 'is-invalid' : ''}`}
                                     value = {description}
                                     onChange = {(e) => setDescription(e.target.value)}
                                 >
                                 </input>
-
+                                {errorMessage && <div className="invalid-feedback">{errorMessage}</div>}
                             </div>
                             <button className='btn btn-success' onClick={(e) => saveTask(e, "Incomplete")}>Save Task</button>
                             <Link to={`/list?name=${listName}`} style={{marginLeft:'10px'}} className='btn btn-danger'>Cancel</Link>
