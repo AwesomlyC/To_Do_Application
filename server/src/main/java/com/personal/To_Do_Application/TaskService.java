@@ -65,8 +65,8 @@ public class TaskService {
         return allTask;
     }
 
-    public Task findDocument(String listName, String taskDescription, String status){
-        return taskRepository.findByListNameAndDescriptionAndStatus(listName, taskDescription, status);
+    public Task findDocument(String id, String listName, String taskDescription, String status){
+        return taskRepository.findByIdAndListNameAndDescriptionAndStatus(id, listName, taskDescription, status);
     }
 
     public Task saveDocument(Task task){

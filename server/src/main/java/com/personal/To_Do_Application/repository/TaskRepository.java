@@ -10,5 +10,5 @@ public interface TaskRepository extends MongoRepository<Task, String> {
     public List<Task> findAll();
     public Task getById(Long id);
     public long count();
-    public Task findByListNameAndDescriptionAndStatus(String listName, String taskDescription, String status);
+    public Task findByIdAndListNameAndDescriptionAndStatus(String id, String listName, String taskDescription, String status);
 }

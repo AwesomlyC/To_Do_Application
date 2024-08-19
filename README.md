@@ -36,4 +36,7 @@ MongoDB is a NoSQL DB that is both easy to understand and use. All technologies 
 - Version 3 (Finalize - 8/17/2024)
     - Add a new home page in which users can create or load lists to display their tasks. Additionally, changed the 'id' to be the maximum number when created instead of the total count. Changed the delete feature to find the specific document (fixed the issue when it delete two documents due to the same 'id'). Added the feature to update the description on the same page.
 - Version 4
-    - TBD
+    - Modified the delete feature again to fix the issue when trying to delete a document that has the same description as another document.
+    - Update UI phase
+        - Color changed for tasks marked completed
+        - Changed navbar to be "Home Page | Title | About"

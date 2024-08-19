@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 
-// const TASK_BASE_REST_API_URL = 'http://localhost:8080/api/v1/tasks/';
-const TASK_BASE_REST_API_URL = "https://todoapplication-production-9583.up.railway.app/api/v1/tasks/"
+const TASK_BASE_REST_API_URL = 'http://localhost:8080/api/v1/tasks/';
+// const TASK_BASE_REST_API_URL = "https://todoapplication-production-9583.up.railway.app/api/v1/tasks/"
 
 
 class TaskService{
@@ -23,8 +23,8 @@ class TaskService{
         return axios.get(TASK_BASE_REST_API_URL + "getNewNumber")
     }
     
-    deleteTask(listName, taskDescription, status){
-        return axios.delete(TASK_BASE_REST_API_URL + listName + "/" + taskDescription + "/" + status)
+    deleteTask(listName, taskDescription, status, id){
+        return axios.delete(TASK_BASE_REST_API_URL + id + "/" + listName + "/" + taskDescription + "/" + status)
     }
 
     updateStatus(task, newStatus){

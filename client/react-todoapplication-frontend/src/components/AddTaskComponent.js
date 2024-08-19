@@ -20,7 +20,6 @@ const AddTaskComponent = () => {
         TaskService.getNextTaskNumber().then((response) => {
             TaskService.createNewTask({...task, taskNumber: response.data}).then((response) => {
                 console.log(response.data)
-                // navigate('/tasks')
                 navigate(-1)
             }).catch(error => {
                 console.log("Error has occurred within createNewTask: " + error);

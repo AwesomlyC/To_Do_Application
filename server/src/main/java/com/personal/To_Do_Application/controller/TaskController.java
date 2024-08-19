@@ -36,7 +36,6 @@ public class TaskController {
 
     @PostMapping("/Incomplete")
     public ResponseEntity<Task> updateStatusIncomplete(@RequestBody Task task){
-//        log.info("DEBUGINGG COMPLETE-- " + task + ": " + task.getTaskDescription());
         System.out.println("BEFORE INCOMPLETE: " + task);
 
         Task test = taskService.updateStatus(task, "Incomplete");
@@ -59,9 +58,9 @@ public class TaskController {
     public ResponseEntity<Long> getNextTaskNumber(){
         return ResponseEntity.ok((Long)taskService.getMaxTaskNumber() + 1);
     }
-    @DeleteMapping("/{listName}/{taskDescription}/{status}")
-    public ResponseEntity<Boolean> deleteTask(@PathVariable String listName, @PathVariable String taskDescription, @PathVariable String status) {
-        Task task = taskService.findDocument(listName, taskDescription, status);
+    @DeleteMapping("/{id}/{listName}/{taskDescription}/{status}")
+    public ResponseEntity<Boolean> deleteTask(@PathVariable String id, @PathVariable String listName, @PathVariable String taskDescription, @PathVariable String status) {
+        Task task = taskService.findDocument(id, listName, taskDescription, status);
         taskService.deleteTask(task);
         return ResponseEntity.ok(true);
     }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import TaskService from '../services/TaskService'
 import { Link, useSearchParams } from 'react-router-dom'
+import "../App.css"
 const ListTaskComponent = () => {
 
     // Setters of States
@@ -27,9 +28,9 @@ const ListTaskComponent = () => {
         })
     }
 
-    const deleteTask = (listName, taskDescription, status) => {
+    const deleteTask = (listName, taskDescription, status, id) => {
         console.log("Deleting Task: "  + listName + " " + taskDescription + " " + status);
-        TaskService.deleteTask(listName, taskDescription, status).then((response) =>{
+        TaskService.deleteTask(listName, taskDescription, status, id).then((response) =>{
             getAllListName(listName);
         }).catch(error =>{
             console.log("Error - Unable to delete " + taskDescription);
@@ -62,6 +63,18 @@ const ListTaskComponent = () => {
         setDescription("")
     }
 
+    const getBackgroundColor = (status) => {
+        console.log("getting backgreound color = " + status)
+        switch (status){
+            case "Complete":
+                console.log("returning lightgreen")
+                return "lightgreen";
+            default:
+                return "brown"
+
+        }
+    }
+
 
     return (
         <div className = "container">
@@ -79,7 +92,7 @@ const ListTaskComponent = () => {
                     {
                         tasks.map(
                             task => 
-                                <tr key = {task.id}>
+                                <tr key = {task.id} className={task.status}>
                                     <td> {task.taskNumber} </td>
                                     {task.id === editTaskId ? (
                                         <div>
@@ -98,7 +111,7 @@ const ListTaskComponent = () => {
                                     <td> {task.status} </td>
                                     <td>
                                         <button className='btn btn-primary' onClick={()=>updateStatus(task, (task.status === "Incomplete") ? "Complete" : "Incomplete")}>Update Status</button>
-                                        <button className='btn btn-danger' style = {{marginLeft:"10px"}} onClick={()=>deleteTask(task.listName, task.description, task.status)}>Delete</button>
+                                        <button className='btn btn-danger' style = {{marginLeft:"10px"}} onClick={()=>deleteTask(task.listName, task.description, task.status, task.id)}>Delete</button>
                                         <button className='btn btn-success'  style = {{marginLeft: "10px"}} onClick={() => handleEditClick(task.id, task.description)}>Edit</button>
                                     </td>
                                 </tr>

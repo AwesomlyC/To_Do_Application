@@ -2,8 +2,12 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 50px;
-  background-color: black;
+  height: 30px;
+  background-color: greenyellow;
   text-align: center;
   color: white;
 }
+.table.table-bordered.table-striped tbody tr.Complete td {
+  background-color: lightgreen;
+}
+
