@@ -67,11 +67,25 @@ const ListTaskComponent = () => {
         setDescription("")
     }
 
+    const setAllTasksIncomplete = (listName) => {
+        TaskService.setAllTasksIncomplete(listName).then((response) => {
+            console.log("RETURN PROPERLY")
+            getAllListName(listName);
+        }).catch(error => {
+            console.log("Error - Cannot reset all tasks: " + error);
+        })
+    }
 
     return (
         <div className = "container">
             <h2 className='text-center'>Your List: {<text className='text-primary'>{listName}</text>}</h2>
-            <Link to ={`/add-task?name=${listName}`} className = "btn btn-primary mb-2">Add Task</Link>
+            {/* <div className='container mt-3'> */}
+                <div className="d-flex justify-content-between p-1">
+                    <Link to ={`/add-task?name=${listName}`} className = "btn btn-primary mb-1">Add Task</Link>
+                    {/* <button className='btn btn-danger'>TEST</button> */}
+                    <button className='btn btn-danger mb-1' onClick={()=>setAllTasksIncomplete(listName)}>Mark All Incomplete</button>
+                </div>
+            {/* </div> */}
             <table className='table table-bordered table-striped'>
                 <thead>
                     <th>Task Id</th>

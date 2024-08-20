@@ -77,4 +77,7 @@ public class TaskService {
         return taskRepository.findById(id);
     }
 
+    public List<Task> findAllByListName(String listName){
+        return taskRepository.findAllByListName(listName);
+    }
 }

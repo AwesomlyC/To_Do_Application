@@ -39,6 +39,12 @@ class TaskService{
         return axios.get(TASK_BASE_REST_API_URL + listName)
     }
 
+    setAllTasksIncomplete(listName){
+        console.log(TASK_BASE_REST_API_URL + listName + "/Incomplete")
+        return axios.post(TASK_BASE_REST_API_URL + listName + "/Incomplete");
+
+    }
+
 }
 
 export default new TaskService();
