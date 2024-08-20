@@ -23,8 +23,8 @@ class TaskService{
         return axios.get(TASK_BASE_REST_API_URL + "getNewNumber")
     }
     
-    deleteTask(listName, taskDescription, status, id){
-        return axios.delete(TASK_BASE_REST_API_URL + id + "/" + listName + "/" + taskDescription + "/" + status)
+    deleteTask(id){
+        return axios.delete(TASK_BASE_REST_API_URL + "delete/" + id)
     }
 
     updateStatus(task, newStatus){
@@ -32,7 +32,8 @@ class TaskService{
     }
 
     updateTaskDescription(task, newDescription){
-        return axios.put(TASK_BASE_REST_API_URL + newDescription, task);
+        const headers = {updateDescription: newDescription}
+        return axios.put(TASK_BASE_REST_API_URL + "modifyDescription", task, {headers});
     }
     getAllListName(listName){
         return axios.get(TASK_BASE_REST_API_URL + listName)

@@ -32,12 +32,11 @@ const ListTaskComponent = () => {
         })
     }
 
-    const deleteTask = (listName, taskDescription, status, id) => {
-        console.log("Deleting Task: "  + listName + " " + taskDescription + " " + status);
-        TaskService.deleteTask(listName, taskDescription, status, id).then((response) =>{
+    const deleteTask = (id) => {
+        TaskService.deleteTask(id).then((response) =>{
             getAllListName(listName);
         }).catch(error =>{
-            console.log("Error - Unable to delete " + taskDescription);
+            console.log("Error - Unable to delete " + id);
         });
     }
 
@@ -105,7 +104,7 @@ const ListTaskComponent = () => {
                                     <td> {task.status} </td>
                                     <td>
                                         <button className='btn btn-primary' onClick={()=>updateStatus(task, (task.status === "Incomplete") ? "Complete" : "Incomplete")}>Update Status</button>
-                                        <button className='btn btn-danger' style = {{marginLeft:"10px"}} onClick={()=>deleteTask(task.listName, task.description, task.status, task.id)}>Delete</button>
+                                        <button className='btn btn-danger' style = {{marginLeft:"10px"}} onClick={()=>deleteTask(task.id)}>Delete</button>
                                         <button className='btn btn-success'  style = {{marginLeft: "10px"}} onClick={() => handleEditClick(task.id, task.description)}>Edit</button>
                                     </td>
                                 </tr>

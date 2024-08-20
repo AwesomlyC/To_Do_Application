@@ -3,15 +3,14 @@ package com.personal.To_Do_Application;
 import com.personal.To_Do_Application.model.Task;
 import com.personal.To_Do_Application.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.QueryAnnotation;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 // Service and Component are similar to a Bean
 @Service
@@ -72,6 +71,10 @@ public class TaskService {
     public Task saveDocument(Task task){
         System.out.println("SAVED TASK: " + task);
         return taskRepository.save(task);
+    }
+
+    public Optional<Task> findDocumentById(String id){
+        return taskRepository.findById(id);
     }
 
 }

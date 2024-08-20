@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin("*")
 @Controller
@@ -58,11 +59,17 @@ public class TaskController {
     public ResponseEntity<Long> getNextTaskNumber(){
         return ResponseEntity.ok((Long)taskService.getMaxTaskNumber() + 1);
     }
-    @DeleteMapping("/{id}/{listName}/{taskDescription}/{status}")
-    public ResponseEntity<Boolean> deleteTask(@PathVariable String id, @PathVariable String listName, @PathVariable String taskDescription, @PathVariable String status) {
-        Task task = taskService.findDocument(id, listName, taskDescription, status);
-        taskService.deleteTask(task);
-        return ResponseEntity.ok(true);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Boolean> deleteTask(@PathVariable String id) {
+//        Task task = taskService.findDocument(id, listName, taskDescription, status);
+        Optional<Task> document = taskService.findDocumentById(id);
+        if (document.isPresent()){
+            System.out.println("DELETING: " + document);
+            taskService.deleteTask(document.get());
+            return ResponseEntity.ok(true);
+        }
+        return ResponseEntity.ok(false);
+
     }
 
     @GetMapping("/{listName}")
@@ -70,8 +77,8 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getListNameTask(listName));
     }
 
-    @PutMapping("/{newDescription}")
-    public ResponseEntity<Task> updateTaskDescription(@RequestBody Task task, @PathVariable String newDescription){
+    @PutMapping("/modifyDescription")
+    public ResponseEntity<Task> updateTaskDescription(@RequestBody Task task, @RequestHeader("updateDescription") String newDescription){
         log.info("SETTING NEW TASK DESCRIPTION: " + newDescription);
         task.setDescription(newDescription);
         Task test = taskService.saveDocument(task);
